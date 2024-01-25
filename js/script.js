@@ -4,6 +4,8 @@ const username = "SChilian";
 const repoList = document.querySelector(".repo-list");
 const allRepos = document.querySelector(".repos");
 const repoData = document.querySelector(".repo-data");
+const backButton = document.querySelector(".view-repos")
+const filterInput = document.querySelector(".filter-repos")
 
 const gitInfo = async function () {
     const response = await fetch (`https://api.github.com/users/${username}`);
@@ -42,6 +44,7 @@ const reposData = async function () {
 }
 
 const oneRepoInfo = function(repos){
+    filterInput.classList.remove("hide");
     for (const repo of repos) {
         const li = document.createElement("li")
         li.classList.add("repo");
@@ -50,6 +53,7 @@ const oneRepoInfo = function(repos){
     
     }
 }
+
 
 repoList.addEventListener("click", function(e) {
     if (e.target.matches("h3")) {
@@ -73,6 +77,8 @@ const specificRepoInfo = async function(repoName) {
         console.log(languages);
         displayRepoInfo(repoInfo, languages);
 
+        backButton.classList.remove("hide");
+
     };
 }
 
@@ -89,3 +95,26 @@ const displayRepoInfo = function(repoInfo, languages) {
         repoData.classList.remove("hide");
         allRepos.classList.add("hide");
 }
+
+backButton.addEventListener("click", function() {
+    allRepos.classList.remove("hide");
+    repoData.classList.add("hide");
+    backButton.classList.add("hide");
+})
+
+filterInput.addEventListener("input", function(e) {
+    const search = e.target.value;
+    console.log(search);
+
+    const repos = document.querySelectorAll(".repo");
+    const caseValue = search.toLowerCase();
+    
+    for (const repo of repos) {
+        const repoCase = repo.innerText.toLowerCase();
+        if (repoCase.includes(caseValue)) {
+            repo.classList.remove("hide");
+        } else {
+            repo.classList.add("hide");
+        }
+    }
+})
