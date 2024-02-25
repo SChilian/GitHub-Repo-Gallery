@@ -28,7 +28,7 @@ const userInfo = function(data) {
           <p><strong>Name:</strong> ${"SChilian"}</p>
           <p><strong>Bio:</strong> ${"Book worm and avid learner turned coder."}</p>
           <p><strong>Location:</strong> ${"Mid-Hudson, New York"}</p>
-          <p><strong>Number of public repos:</strong> ${24}</p>
+          <p><strong>Number of public repos:</strong> ${28}</p>
         </div>`;
 
         profile.append(div);
